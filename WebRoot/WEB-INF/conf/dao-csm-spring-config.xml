@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- 全局DAO配置模板 -->
+
+	<!-- <bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true"></bean>-->
+	<bean id="defaultLobHandler"
+		class="org.springframework.jdbc.support.lob.OracleLobHandler"
+		lazy-init="true">
+		<property name="nativeJdbcExtractor" ref="nativeJdbcExtractor" />
+	</bean>
+	<bean id="nativeJdbcExtractor"
+		class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"
+		lazy-init="true" />
+	
+	<bean id="csmDAOProxy" lazy-init="true" class="com.clj.csmanagement.dao.CSMDAO" abstract="true">
+		<property name="dataSource">
+			<ref bean="applicationDataSource" />
+		</property>
+		<property name="lobHandler">
+			<ref bean="defaultLobHandler" />
+		</property>
+	</bean>
+</beans>

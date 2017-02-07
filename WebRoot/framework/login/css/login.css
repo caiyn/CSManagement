@@ -1,0 +1,17 @@
+@charset "utf-8";
+*{margin:0;
+  padding:0;}
+   .classc{width:200px;height:200px;background: #000;}
+   .content{background-image:url(../images/blur.jpg); height: 666px;
+    width: 1349px;
+    background-repeat:  no-repeat;position: relative;}
+    .loginform{width:400px;height:300px;opacity: 0.6;background: #fff;border:2px solid #ddd;position: absolute;left:450px;top:250px;}
+    p{font-size: 100px;text-align: center;position: absolute;top:50px;left:200px;color:#1e90ff;}
+  .cell-icon-a{width:400px;height:60px;margin:40px 0 20px 0;text-align: center;}
+  .cell-icon-b{width:400px;height:60px;margin:20px 0 10px 0;text-align: center;}
+  .btn-warpa{width:120px;height:60px;margin:20px 0px 10px 80px;text-align: left;float: left;}
+  .btn-warpb{width:120px;height:60px;margin:20px 80px 10px 0px;text-align: right;float: left;}
+  .cell-icon-a input{width:250px;height:40px;text-align: left;}
+  .cell-icon-b input{width:250px;height:40px;text-align: left;}
+  .btn-warpa input{height: 34px;width: 70px; opacity:1;border:none; border-radius:3px;background: #0099ff;font-size: 16px; color: #fff;cursor: pointer;}
+  .btn-warpb input{height: 34px;width: 70px; opacity:1;border:none; border-radius:3px;background: #ff7744;font-size: 16px; color: #fff;cursor: pointer;}

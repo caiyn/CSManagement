@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/jdbc
+	http://www.springframework.org/schema/jdbc/spring-jdbc.xsd"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc">
+
+	<!-- jdbc 数据源 -->
+	<bean id="applicationDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${drm.dataSource.driverClassName}" />
+		<property name="url" value="${drm.dataSource.url}" />
+		<property name="username" value="${drm.dataSource.username}" />
+		<property name="password" value="${drm.dataSource.password}" />
+		<property name="initialSize" value="${drm.dataSource.initialSize}" />
+		<property name="maxActive" value="${drm.dataSource.maxActive}" />
+		<property name="minIdle" value="${drm.dataSource.minIdle}" />
+		<property name="maxIdle" value="${drm.dataSource.maxIdle}" />
+		<property name="maxWait" value="${drm.dataSource.maxWait}" />
+	</bean>
+	
+	<!-- 事物管理器 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="applicationDataSource" />
+	</bean>
+	
+</beans>

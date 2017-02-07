@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 引入登录注册框架集成的配置文件 -->
+	<include file="com/clj/csmanagement/management/login/login-struts.xml"></include>
+	<!-- 引入货物管理框架集成的配置文件 -->
+	<include file="com/clj/csmanagement/management/goodsManage/goodsManagement-struts.xml"></include>
+	<!-- 引入后台管理框架集成的配置文件 -->
+	<include file="com/clj/csmanagement/management/adminManage/adminManagement-struts.xml"></include>
+	
+	<!-- 常量设置 -->
+	<constant name="struts.locale" value="zh_CN" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.i18n.reload" value="true" />
+	<constant name="struts.action.extension" value="do" />
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<constant name="struts.custom.i18n.resources" value="i18n" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.xslt.nocache" value="true" />
+	<constant name="struts.convention.result.path" value="/" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<!-- 设置struts访问action包名 -->
+	<constant name="struts.convention.package.locators" value="action"/>
+	<!-- 将action托管给spring -->
+	<constant name="struts.objectFactory" value="spring"></constant>
+	<!-- EPP MultiPartRequest 解决上传文件时大小限制异常的捕获处理 -->
+	<!--<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest" name="struts"
+		class="org.apache.struts2.dispatcher.multipart.JakartaMultiPartRequest" scope="default" optional="true" />
+	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest" name="jakarta"
+		class="org.apache.struts2.dispatcher.multipart.JakartaMultiPartRequest" scope="default" optional="true" />
+	-->
+	<package name="csm-default" extends="json-default" namespace="/">
+		<result-types>
+			<!-- 添加的自定义类型JSON对象 -->
+			<result-type name="json" class="org.apache.struts2.json.JSONResult">
+				<param name="enableGZIP">true</param>
+			</result-type>
+		</result-types>
+		<interceptors>
+			<!-- 修改 parameterInterceptor 处理传递的JSON数据，映射到Action中 -->
+			<interceptor name="csmParams"
+				class="com.clj.csmanagement.interceptor.ForumParametersInterceptor" />
+			<!-- 修改ExceptionInterceptor 处理Ajax提交后的错误情况  -->
+			<interceptor name="csmException" class="com.clj.csmanagement.interceptor.ForumExceptionMappingInterceptor" />
+			<!-- EPP 处理 fileUpload 时将给出更加详细的错误信息  -->
+			<interceptor name="csmFileUpload" class="com.clj.csmanagement.interceptor.ForumFileUploadInterceptor" />
+			<!-- 业务日志上下文对象信息 -->
+			<interceptor name="csmBizLogContext" class="com.clj.csmanagement.interceptor.ForumBizLogContextInterceptor" />
+			
+			<!-- Basic stack -->
+			<interceptor-stack name="basicStack">
+				<interceptor-ref name="exception" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="checkbox" />
+				<interceptor-ref name="params" />
+				<interceptor-ref name="conversionError" />
+			</interceptor-stack>
+	
+			<!-- Sample file upload stack -->
+			<interceptor-stack name="fileUploadStack">
+				<interceptor-ref name="fileUpload" />
+				<interceptor-ref name="basicStack" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="csmStack">
+				<!-- 添加 servletConfig 拦截器 -->
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="autowiring" />
+				<interceptor-ref name="createSession" />
+				<interceptor-ref name="csmException" />
+				<interceptor-ref name="csmFileUpload" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="modelDriven" />
+				<!--<interceptor-ref name="eppBizLogContext" />-->
+				<interceptor-ref name="csmParams" />
+				<interceptor-ref name="params">
+					<param name="excludeParams">dojo\..*,^struts\..*</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="csmStack" />
+		
+		<!-- 全局的result -->
+		<global-results>
+			<result name="jsonResult" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="defaultEncoding">UTF-8</param>
+			</result>
+			<!--  
+			<result name="nopermission">/nopermission_error.jsp</result>
+			<result name="chooseSubject">/search/subject/subject.jsp</result>
+			<result name="searchError">/search_error.jsp</result>
+			<result name="global_error">/test/errors.jsp</result>
+			-->
+			<result name="ajax_error" type="json"></result>
+		</global-results>
+		<!-- 异常处理的拦截器 -->
+		<global-exception-mappings>
+			<exception-mapping exception="com.clj.csmanagement.exception.AjaxException" result="ajax_error" />
+			<exception-mapping exception="com.clj.csmanagement.exception.SystemException" result="error" />
+			<exception-mapping exception="com.clj.csmanagement.exception.ForumException" result="error" />
+		</global-exception-mappings>
+	</package>
+	
+</struts>

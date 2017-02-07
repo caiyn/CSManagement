@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+	
+	<!-- 引入spring配置文件 -->
+	
+	<!-- 引入框架使用的属性文件 -->
+	<import resource="/conf/common-csm-spring-config.xml" />
+	<!-- 引入数据库配置文件 -->
+	<import resource="/conf/datasource-csm-spring-config.xml" />
+	<!-- 引入全局DAO配置文件 -->
+	<import resource="/conf/dao-csm-spring-config.xml" />
+	
+	
+	<!-- 引入页面跳转模块的AC、BS、DAO配置文件 
+	<import resource="/conf/platform/dispatcher/dispatcher-action-context.xml" />
+	<import resource="/conf/platform/dispatcher/dispatcher-bs-context.xml" />
+	<import resource="/conf/platform/dispatcher/dispatcher-dao-context.xml" />
+	-->
+	<!-- 引入登录注册模块的AC、BS、DAO配置文件 -->
+	<import resource="/conf/login/login-action-context.xml"/>
+	<import resource="/conf/login/login-bs-context.xml"/>
+	<import resource="/conf/login/login-dao-context.xml"/>
+	
+	<!-- 引入货物管理模块的AC、BS、DAO配置文件 -->
+	<import resource="/conf/goodsManagement/goodsManagement-action-context.xml"/>
+	<import resource="/conf/goodsManagement/goodsManagement-bs-context.xml"/>
+	<import resource="/conf/goodsManagement/goodsManagement-dao-context.xml"/>
+	
+	<!-- 引入后台管理模块的AC、BS、DAO配置文件 -->
+	<import resource="/conf/adminManagement/adminManagement-action-context.xml"/>
+	<import resource="/conf/adminManagement/adminManagement-bs-context.xml"/>
+	<import resource="/conf/adminManagement/adminManagement-dao-context.xml"/>
+</beans>

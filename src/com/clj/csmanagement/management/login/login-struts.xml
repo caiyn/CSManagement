@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 主要处理检索式历史相关业务的Action -->
+	<package name="login" extends="csm-default" namespace="/login">
+		<!-- 注册 -->
+		<action name="register" class="login.LoginAC" ></action>
+		<!-- 注册 -->
+		<action name="loginAC" class="login.LoginAC" >
+			<result name="admin"  type="redirect">/management/usermanagement.jsp</result>
+			<result name="normal"  type="redirect">/platform/goodsManagement.jsp</result>
+			<result name="errorpage"  type="redirect">/framework/login/login.jsp</result>
+		</action>
+	</package>
+</struts>

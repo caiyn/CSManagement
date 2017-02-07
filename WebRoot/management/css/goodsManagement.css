@@ -1,0 +1,15 @@
+@charset "utf-8";
+*{margin:0;padding:0;}
+body{background: #f6f6f6;}
+.header{width:100%;height:30px;background: #33ffff;}
+.header_welcome{width:40%;height:30px;float:right;}
+.header_welcome_user{width:100px;height:30px;float:left;line-height: 30px;}
+.header_welcome_logout{width:50px;height:30px;float:left;line-height: 30px;}
+.logout_a{cursor:pointer;text-decoration:none;color:#000;}
+.search{width:100%;height:100px;}
+.search_out{width:50%;height:100px;float:right;line-height: 100px;}
+.search_out_input{width:452px;height:38px;float:left;margin:31px 0 31px 0;}
+.search_out_btn{width:72px;height:38px;float:left;margin:31px 0 31px 0;}
+.search_out_input input{width:450px;height:36px;border:1px solid #ccc;}
+.search_out_btn input{width:70px;height:36px;border:1px solid #ccc;}
+.content{width:1048px;margin:0 auto;border:1px solid #ccc;height:600px;}
